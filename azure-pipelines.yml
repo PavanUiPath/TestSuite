@@ -28,3 +28,10 @@ steps:
     projectJsonPath: '$(Build.SourcesDirectory)'
     orchestratorConnection: 'UiPath_TestSuite'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+- task: UiPathDeploy@5
+  inputs:
+    orchestratorConnection: 'UiPath_TestSuite'
+    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
+    folderName: 'Pavan'
+    traceLevel: 'Information'
+
