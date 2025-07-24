@@ -34,4 +34,8 @@ steps:
     packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
     folderName: 'Pavan'
     traceLevel: 'Information'
-
+- task: UiPathRunJob@5
+  inputs:
+    orchestratorConnection: 'UiPath_TestSuite'
+    processName: 'GIT_Sample_Main.xaml'
+    folderName: 'Pavan'
