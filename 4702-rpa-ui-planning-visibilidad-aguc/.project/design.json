@@ -1,0 +1,42 @@
+{
+  "Tags": [
+    {
+      "Key": "API Google drive"
+    },
+    {
+      "Key": "CORREO plninventarios@cordialsausa.com"
+    },
+    {
+      "Key": "SAP_IDIOMA Es"
+    },
+    {
+      "Key": "SAP_MANDANTE 300"
+    },
+    {
+      "Key": "APP Excel"
+    },
+    {
+      "Key": "TIPO_NOTIFICACION smtp, PUERTO 587, SERVER smtp.gmail.com"
+    },
+    {
+      "Key": "SAP_Usuario TTSSRPAPLAIN"
+    },
+    {
+      "Key": "SAP_Transaccion ME2M"
+    },
+    {
+      "Key": "SAP_Transaccion ME2N"
+    },
+    {
+      "Key": "SAP_Transaccion ME3L"
+    },
+    {
+      "Key": "SAP_Transaccion ZMM_POL_4517_1"
+    },
+    {
+      "Key": "SAP_Transaccion ZSD_POS_1389_1"
+    }
+  ],
+  "SeparateRuntimeDependencies": false,
+  "IncludeSources": true
+}

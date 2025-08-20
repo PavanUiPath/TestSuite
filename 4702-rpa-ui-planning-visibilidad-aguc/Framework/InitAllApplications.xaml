@@ -1,0 +1,1479 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ucas="clr-namespace:UiPath.Core.Activities.SAP;assembly=UiPath.UiAutomation.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_dic_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_str_ContraseñaGsuite" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_UsuarioGsuite" Type="InArgument(x:String)" />
+    <x:Property Name="in_Str_NombreArchivo" Type="InArgument(x:String)" />
+    <x:Property Name="out_dt_OverRoad" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_Me2nOpen" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_str_IDArchivoBase" Type="OutArgument(x:String)" />
+    <x:Property Name="out_dt_ArchivoB2C" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_TipoDocumentos" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_Proveedores" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_Centros" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_Materiales" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_Transit_1389" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_Open_me3l" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_WareHouse_1200" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_NationalAcct" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1132,1327</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Management.Automation</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Core.Activities.SAP</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="450,1222" sap2010:WorkflowViewState.IdRef="Sequence_9">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="int_Contador" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;------&gt;Opening applications...&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="512,345" sap2010:WorkflowViewState.IdRef="Sequence_101">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SAP\LoguinSAP.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SAP\LoguinSAP.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Sequence sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_118">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Gsuite\ArchivoWareHouse.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Gsuite\ArchivoWareHouse.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_str_ContraseñaGsuite">[in_str_ContraseñaGsuite]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_str_UsuarioGsuite">[in_str_UsuarioGsuite]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_ZMM_POL_1200">[out_dt_WareHouse_1200]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <Sequence DisplayName="Sequence crear modos" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_34">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar Crear mod 2" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_1" Item="Sistema/Crear modo">
+                <ucas:ClickToolbarButton.Items>
+                  <scg:List x:TypeArguments="x:String" Capacity="50">
+                    <x:String>Lista/Refrescar</x:String>
+                    <x:String>Lista/Releer</x:String>
+                    <x:String>Lista/Finalizar</x:String>
+                    <x:String>Tratar/Cancelar</x:String>
+                    <x:String>Pasar a/Atrás</x:String>
+                    <x:String>Opciones/Selección de objeto</x:String>
+                    <x:String>Opciones/Selección de lista individual</x:String>
+                    <x:String>Tratamiento en masa/Ejecutar</x:String>
+                    <x:String>Tratamiento en masa/Opciones</x:String>
+                    <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                    <x:String>Sistema/Crear modo</x:String>
+                    <x:String>Sistema/Borrar modo</x:String>
+                    <x:String>Sistema/Servicios para objeto</x:String>
+                    <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                    <x:String>Sistema/Jobs propios</x:String>
+                    <x:String>Sistema/Mensaje breve</x:String>
+                    <x:String>Sistema/Status...</x:String>
+                    <x:String>Sistema/Salir del sistema</x:String>
+                    <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                    <x:String>Ayuda/Biblioteca SAP</x:String>
+                    <x:String>Ayuda/Glosario</x:String>
+                    <x:String>Ayuda/Infos de release</x:String>
+                    <x:String>Ayuda/SAP Service Marketplace</x:String>
+                    <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                    <x:String>Ayuda/Parametrizaciones...</x:String>
+                    <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                    <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                    <x:String>Sistema/Servicios/Reporting</x:String>
+                    <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                    <x:String>Sistema/Servicios/Control de salida</x:String>
+                    <x:String>Sistema/Servicios/Input directo</x:String>
+                    <x:String>Sistema/Servicios/Cola</x:String>
+                    <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                    <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                    <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                    <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                    <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                    <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                    <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                    <x:String>Sistema/Lista/Imprimir</x:String>
+                    <x:String>Sistema/Lista/Buscar...</x:String>
+                    <x:String>Sistema/Lista/Enviar</x:String>
+                    <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                    <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                    <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                  </scg:List>
+                </ucas:ClickToolbarButton.Items>
+                <ucas:ClickToolbarButton.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ucas:ClickToolbarButton.Target>
+              </ucas:ClickToolbarButton>
+              <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar Crear mod 3" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_2" Item="Sistema/Crear modo">
+                <ucas:ClickToolbarButton.Items>
+                  <scg:List x:TypeArguments="x:String" Capacity="50">
+                    <x:String>Lista/Refrescar</x:String>
+                    <x:String>Lista/Releer</x:String>
+                    <x:String>Lista/Finalizar</x:String>
+                    <x:String>Tratar/Cancelar</x:String>
+                    <x:String>Pasar a/Atrás</x:String>
+                    <x:String>Opciones/Selección de objeto</x:String>
+                    <x:String>Opciones/Selección de lista individual</x:String>
+                    <x:String>Tratamiento en masa/Ejecutar</x:String>
+                    <x:String>Tratamiento en masa/Opciones</x:String>
+                    <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                    <x:String>Sistema/Crear modo</x:String>
+                    <x:String>Sistema/Borrar modo</x:String>
+                    <x:String>Sistema/Servicios para objeto</x:String>
+                    <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                    <x:String>Sistema/Jobs propios</x:String>
+                    <x:String>Sistema/Mensaje breve</x:String>
+                    <x:String>Sistema/Status...</x:String>
+                    <x:String>Sistema/Salir del sistema</x:String>
+                    <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                    <x:String>Ayuda/Biblioteca SAP</x:String>
+                    <x:String>Ayuda/Glosario</x:String>
+                    <x:String>Ayuda/Infos de release</x:String>
+                    <x:String>Ayuda/SAP Service Marketplace</x:String>
+                    <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                    <x:String>Ayuda/Parametrizaciones...</x:String>
+                    <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                    <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                    <x:String>Sistema/Servicios/Reporting</x:String>
+                    <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                    <x:String>Sistema/Servicios/Control de salida</x:String>
+                    <x:String>Sistema/Servicios/Input directo</x:String>
+                    <x:String>Sistema/Servicios/Cola</x:String>
+                    <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                    <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                    <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                    <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                    <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                    <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                    <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                    <x:String>Sistema/Lista/Imprimir</x:String>
+                    <x:String>Sistema/Lista/Buscar...</x:String>
+                    <x:String>Sistema/Lista/Enviar</x:String>
+                    <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                    <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                    <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                  </scg:List>
+                </ucas:ClickToolbarButton.Items>
+                <ucas:ClickToolbarButton.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ucas:ClickToolbarButton.Target>
+              </ucas:ClickToolbarButton>
+            </Sequence>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ME2N_Open.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SAP\ME2N_Open.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ME3L_Open.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SAP\ME3L_Open.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ZSD_POS_1389_1_Transit.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SAP\ZSD_POS_1389_1_Transit.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <Parallel sap:VirtualizedContainerService.HintSize="450,52" sap2010:WorkflowViewState.IdRef="Parallel_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Sequence DisplayName="Sequence sesion 1" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Continuar'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8e637478-f201-40d3-b542-14a40d4d9a70" InformativeScreenshot="74cb0981fb1fc5e25b87526c181d0e65" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='1' /&gt;&lt;sap id='tbar[1]/btn[8]' tooltip='Ejecutar*' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Consultando reporte me2n&quot;]" />
+                <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'GridViewColumn  Material'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bc99e561-09d8-4d90-a0ea-48ecf934263c" InformativeScreenshot="881c1f2f9a3a5ad17d5c5f1231e40029" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='1' /&gt;&lt;sap colName='EBELN' id='usr/cntlGRID1/shellcont/shell' tableRow='3' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+              </Sequence>
+              <Sequence DisplayName="Sequence sesion 2" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Continuar'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8e637478-f201-40d3-b542-14a40d4d9a70" InformativeScreenshot="74cb0981fb1fc5e25b87526c181d0e65" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='2' /&gt;&lt;sap id='tbar[1]/btn[8]' tooltip='Ejecutar*' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Consultando reporte me3l&quot;]" />
+                <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'GridViewColumn  Material'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bc99e561-09d8-4d90-a0ea-48ecf934263c" InformativeScreenshot="881c1f2f9a3a5ad17d5c5f1231e40029" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='2' /&gt;&lt;sap colName='EBELN' id='usr/cntlGRID1/shellcont/shell' tableRow='3' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+              </Sequence>
+              <Sequence DisplayName="Sequence sesion 3" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Continuar'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8e637478-f201-40d3-b542-14a40d4d9a70" InformativeScreenshot="74cb0981fb1fc5e25b87526c181d0e65" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='3' /&gt;&lt;sap id='tbar[1]/btn[8]' tooltip='Ejecutar*' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Consultando reporte zsd_pos_1389_1&quot;]" />
+                <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'GridViewColumn  Material'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bc99e561-09d8-4d90-a0ea-48ecf934263c" InformativeScreenshot="61a74f8ac1349420583d6bae0d20b8f2" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='3' /&gt;&lt;sap colName='BUKRS' id='usr/cntlGRID1/shellcont/shell/shellcont[1]/shell' tableRow='0' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:UiElementExists>
+              </Sequence>
+            </Parallel>
+            <Assign sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[int_Contador]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">1</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Guardando archivos de las transacciones&quot;]" />
+            <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[int_Contador&lt;=4]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="450,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence sap:VirtualizedContainerService.HintSize="476,322" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SAP\Guardar_Archivos.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="SAP\Guardar_Archivos.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_str_sessionSAP">[int_Contador.ToString]</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Me2nOpen">[out_dt_Me2nOpen]</InOutArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Me3l">[out_dt_Open_me3l]</InOutArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_zsd_pos_1389_1">[out_dt_Transit_1389]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[int_Contador]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[int_Contador+1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ui:InterruptibleDoWhile.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleDoWhile>
+            <Sequence DisplayName="Sequence cerrar modos" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_89">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Borrar modo 1&quot;]" />
+              <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar cerrar modo" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_4" Item="Sistema/Borrar modo">
+                <ucas:ClickToolbarButton.Items>
+                  <scg:List x:TypeArguments="x:String" Capacity="50">
+                    <x:String>Lista/Refrescar</x:String>
+                    <x:String>Lista/Releer</x:String>
+                    <x:String>Lista/Finalizar</x:String>
+                    <x:String>Tratar/Cancelar</x:String>
+                    <x:String>Pasar a/Atrás</x:String>
+                    <x:String>Opciones/Selección de objeto</x:String>
+                    <x:String>Opciones/Selección de lista individual</x:String>
+                    <x:String>Tratamiento en masa/Ejecutar</x:String>
+                    <x:String>Tratamiento en masa/Opciones</x:String>
+                    <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                    <x:String>Sistema/Crear modo</x:String>
+                    <x:String>Sistema/Borrar modo</x:String>
+                    <x:String>Sistema/Servicios para objeto</x:String>
+                    <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                    <x:String>Sistema/Jobs propios</x:String>
+                    <x:String>Sistema/Mensaje breve</x:String>
+                    <x:String>Sistema/Status...</x:String>
+                    <x:String>Sistema/Salir del sistema</x:String>
+                    <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                    <x:String>Ayuda/Biblioteca SAP</x:String>
+                    <x:String>Ayuda/Glosario</x:String>
+                    <x:String>Ayuda/Infos de release</x:String>
+                    <x:String>Ayuda/SAP Service Marketplace</x:String>
+                    <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                    <x:String>Ayuda/Parametrizaciones...</x:String>
+                    <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                    <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                    <x:String>Sistema/Servicios/Reporting</x:String>
+                    <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                    <x:String>Sistema/Servicios/Control de salida</x:String>
+                    <x:String>Sistema/Servicios/Input directo</x:String>
+                    <x:String>Sistema/Servicios/Cola</x:String>
+                    <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                    <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                    <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                    <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                    <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                    <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                    <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                    <x:String>Sistema/Lista/Imprimir</x:String>
+                    <x:String>Sistema/Lista/Buscar...</x:String>
+                    <x:String>Sistema/Lista/Enviar</x:String>
+                    <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                    <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                    <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                  </scg:List>
+                </ucas:ClickToolbarButton.Items>
+                <ucas:ClickToolbarButton.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ucas:ClickToolbarButton.Target>
+              </ucas:ClickToolbarButton>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Borrar modo 2&quot;]" />
+              <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar cerrar modo" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_3" Item="Sistema/Borrar modo">
+                <ucas:ClickToolbarButton.Items>
+                  <scg:List x:TypeArguments="x:String" Capacity="50">
+                    <x:String>Lista/Refrescar</x:String>
+                    <x:String>Lista/Releer</x:String>
+                    <x:String>Lista/Finalizar</x:String>
+                    <x:String>Tratar/Cancelar</x:String>
+                    <x:String>Pasar a/Atrás</x:String>
+                    <x:String>Opciones/Selección de objeto</x:String>
+                    <x:String>Opciones/Selección de lista individual</x:String>
+                    <x:String>Tratamiento en masa/Ejecutar</x:String>
+                    <x:String>Tratamiento en masa/Opciones</x:String>
+                    <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                    <x:String>Sistema/Crear modo</x:String>
+                    <x:String>Sistema/Borrar modo</x:String>
+                    <x:String>Sistema/Servicios para objeto</x:String>
+                    <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                    <x:String>Sistema/Jobs propios</x:String>
+                    <x:String>Sistema/Mensaje breve</x:String>
+                    <x:String>Sistema/Status...</x:String>
+                    <x:String>Sistema/Salir del sistema</x:String>
+                    <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                    <x:String>Ayuda/Biblioteca SAP</x:String>
+                    <x:String>Ayuda/Glosario</x:String>
+                    <x:String>Ayuda/Infos de release</x:String>
+                    <x:String>Ayuda/SAP Service Marketplace</x:String>
+                    <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                    <x:String>Ayuda/Parametrizaciones...</x:String>
+                    <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                    <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                    <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                    <x:String>Sistema/Servicios/Reporting</x:String>
+                    <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                    <x:String>Sistema/Servicios/Control de salida</x:String>
+                    <x:String>Sistema/Servicios/Input directo</x:String>
+                    <x:String>Sistema/Servicios/Cola</x:String>
+                    <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                    <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                    <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                    <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                    <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                    <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                    <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                    <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                    <x:String>Sistema/Lista/Imprimir</x:String>
+                    <x:String>Sistema/Lista/Buscar...</x:String>
+                    <x:String>Sistema/Lista/Enviar</x:String>
+                    <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                    <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                    <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                  </scg:List>
+                </ucas:ClickToolbarButton.Items>
+                <ucas:ClickToolbarButton.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ucas:ClickToolbarButton.Target>
+              </ucas:ClickToolbarButton>
+            </Sequence>
+          </Sequence>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="516,21" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_109">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,141" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Reintento de descarga de archivo&quot;]" />
+              <ui:KillProcess AppliesTo="{x:Null}" Process="{x:Null}" ContinueOnError="True" DisplayName="Kill Process SAP" sap:VirtualizedContainerService.HintSize="450,133" sap2010:WorkflowViewState.IdRef="KillProcess_3" ProcessName="saplogon" />
+              <ui:KillProcess AppliesTo="{x:Null}" Process="{x:Null}" ContinueOnError="True" DisplayName="Kill Process Sap" sap:VirtualizedContainerService.HintSize="450,133" sap2010:WorkflowViewState.IdRef="KillProcess_4" ProcessName="saplogon" />
+              <TryCatch sap2010:Annotation.AnnotationText="Tome una captura de pantalla del estado actual de la pantalla para facilitar la depuración." DisplayName="Try taking screenshot" sap:VirtualizedContainerService.HintSize="450,124" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch.Try>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Captura de pantalla por error" DisplayName="Invoke TakeScreenshot workflow" sap:VirtualizedContainerService.HintSize="334,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[in_dic_Config("ExScreenshotsFolderPath").ToString]</InArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath" />
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="Exception" />
+                      </ActivityAction.Argument>
+                      <ui:LogMessage DisplayName="Log message (Screenshot not taken)" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Warn" Message="[&quot;Failed to take screenshot: &quot;+Exception.Message+&quot; at Source: &quot;+Exception.Source+&quot; At Source: &quot;+Exception.Source]" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SAP\LoguinSAP.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="SAP\LoguinSAP.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <TryCatch sap2010:Annotation.AnnotationText="Tome una captura de pantalla del estado actual de la pantalla para facilitar la depuración." DisplayName="Try taking screenshot" sap:VirtualizedContainerService.HintSize="450,124" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch.Try>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Captura de pantalla por error" DisplayName="Invoke TakeScreenshot workflow" sap:VirtualizedContainerService.HintSize="334,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[in_dic_Config("ExScreenshotsFolderPath").ToString]</InArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath" />
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_6">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="Exception" />
+                      </ActivityAction.Argument>
+                      <ui:LogMessage DisplayName="Log message (Screenshot not taken)" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Warn" Message="[&quot;Failed to take screenshot: &quot;+Exception.Message+&quot; at Source: &quot;+Exception.Source+&quot; At Source: &quot;+Exception.Source]" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+              <Sequence sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_108">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Gsuite\ArchivoWareHouse.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Gsuite\ArchivoWareHouse.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_ContraseñaGsuite">[in_str_ContraseñaGsuite]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_UsuarioGsuite">[in_str_UsuarioGsuite]</InArgument>
+                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_ZMM_POL_1200">[out_dt_WareHouse_1200]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <Sequence DisplayName="Sequence crear modos" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_102">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar Crear mod 2" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_5" Item="Sistema/Crear modo">
+                    <ucas:ClickToolbarButton.Items>
+                      <scg:List x:TypeArguments="x:String" Capacity="50">
+                        <x:String>Lista/Refrescar</x:String>
+                        <x:String>Lista/Releer</x:String>
+                        <x:String>Lista/Finalizar</x:String>
+                        <x:String>Tratar/Cancelar</x:String>
+                        <x:String>Pasar a/Atrás</x:String>
+                        <x:String>Opciones/Selección de objeto</x:String>
+                        <x:String>Opciones/Selección de lista individual</x:String>
+                        <x:String>Tratamiento en masa/Ejecutar</x:String>
+                        <x:String>Tratamiento en masa/Opciones</x:String>
+                        <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                        <x:String>Sistema/Crear modo</x:String>
+                        <x:String>Sistema/Borrar modo</x:String>
+                        <x:String>Sistema/Servicios para objeto</x:String>
+                        <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                        <x:String>Sistema/Jobs propios</x:String>
+                        <x:String>Sistema/Mensaje breve</x:String>
+                        <x:String>Sistema/Status...</x:String>
+                        <x:String>Sistema/Salir del sistema</x:String>
+                        <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                        <x:String>Ayuda/Biblioteca SAP</x:String>
+                        <x:String>Ayuda/Glosario</x:String>
+                        <x:String>Ayuda/Infos de release</x:String>
+                        <x:String>Ayuda/SAP Service Marketplace</x:String>
+                        <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                        <x:String>Ayuda/Parametrizaciones...</x:String>
+                        <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                        <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                        <x:String>Sistema/Servicios/Reporting</x:String>
+                        <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                        <x:String>Sistema/Servicios/Control de salida</x:String>
+                        <x:String>Sistema/Servicios/Input directo</x:String>
+                        <x:String>Sistema/Servicios/Cola</x:String>
+                        <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                        <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                        <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                        <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                        <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                        <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                        <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                        <x:String>Sistema/Lista/Imprimir</x:String>
+                        <x:String>Sistema/Lista/Buscar...</x:String>
+                        <x:String>Sistema/Lista/Enviar</x:String>
+                        <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                        <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                        <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                      </scg:List>
+                    </ucas:ClickToolbarButton.Items>
+                    <ucas:ClickToolbarButton.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ucas:ClickToolbarButton.Target>
+                  </ucas:ClickToolbarButton>
+                  <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar Crear mod 3" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_6" Item="Sistema/Crear modo">
+                    <ucas:ClickToolbarButton.Items>
+                      <scg:List x:TypeArguments="x:String" Capacity="50">
+                        <x:String>Lista/Refrescar</x:String>
+                        <x:String>Lista/Releer</x:String>
+                        <x:String>Lista/Finalizar</x:String>
+                        <x:String>Tratar/Cancelar</x:String>
+                        <x:String>Pasar a/Atrás</x:String>
+                        <x:String>Opciones/Selección de objeto</x:String>
+                        <x:String>Opciones/Selección de lista individual</x:String>
+                        <x:String>Tratamiento en masa/Ejecutar</x:String>
+                        <x:String>Tratamiento en masa/Opciones</x:String>
+                        <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                        <x:String>Sistema/Crear modo</x:String>
+                        <x:String>Sistema/Borrar modo</x:String>
+                        <x:String>Sistema/Servicios para objeto</x:String>
+                        <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                        <x:String>Sistema/Jobs propios</x:String>
+                        <x:String>Sistema/Mensaje breve</x:String>
+                        <x:String>Sistema/Status...</x:String>
+                        <x:String>Sistema/Salir del sistema</x:String>
+                        <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                        <x:String>Ayuda/Biblioteca SAP</x:String>
+                        <x:String>Ayuda/Glosario</x:String>
+                        <x:String>Ayuda/Infos de release</x:String>
+                        <x:String>Ayuda/SAP Service Marketplace</x:String>
+                        <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                        <x:String>Ayuda/Parametrizaciones...</x:String>
+                        <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                        <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                        <x:String>Sistema/Servicios/Reporting</x:String>
+                        <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                        <x:String>Sistema/Servicios/Control de salida</x:String>
+                        <x:String>Sistema/Servicios/Input directo</x:String>
+                        <x:String>Sistema/Servicios/Cola</x:String>
+                        <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                        <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                        <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                        <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                        <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                        <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                        <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                        <x:String>Sistema/Lista/Imprimir</x:String>
+                        <x:String>Sistema/Lista/Buscar...</x:String>
+                        <x:String>Sistema/Lista/Enviar</x:String>
+                        <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                        <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                        <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                      </scg:List>
+                    </ucas:ClickToolbarButton.Items>
+                    <ucas:ClickToolbarButton.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ucas:ClickToolbarButton.Target>
+                  </ucas:ClickToolbarButton>
+                </Sequence>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ME2N_Open.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="SAP\ME2N_Open.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ME3L_Open.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="SAP\ME3L_Open.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ZSD_POS_1389_1_Transit.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="SAP\ZSD_POS_1389_1_Transit.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <Parallel sap:VirtualizedContainerService.HintSize="450,52" sap2010:WorkflowViewState.IdRef="Parallel_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Sequence sesion 1" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_103">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Continuar'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition Position="Center">
+                          <ui:CursorPosition.OffsetX>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetX>
+                          <ui:CursorPosition.OffsetY>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetY>
+                        </ui:CursorPosition>
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8e637478-f201-40d3-b542-14a40d4d9a70" InformativeScreenshot="74cb0981fb1fc5e25b87526c181d0e65" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='1' /&gt;&lt;sap id='tbar[1]/btn[8]' tooltip='Ejecutar*' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Consultando reporte me2n&quot;]" />
+                    <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'GridViewColumn  Material'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="UiElementExists_4">
+                      <ui:UiElementExists.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bc99e561-09d8-4d90-a0ea-48ecf934263c" InformativeScreenshot="881c1f2f9a3a5ad17d5c5f1231e40029" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='1' /&gt;&lt;sap colName='EBELN' id='usr/cntlGRID1/shellcont/shell' tableRow='3' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:UiElementExists.Target>
+                    </ui:UiElementExists>
+                  </Sequence>
+                  <Sequence DisplayName="Sequence sesion 2" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_104">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Continuar'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition Position="Center">
+                          <ui:CursorPosition.OffsetX>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetX>
+                          <ui:CursorPosition.OffsetY>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetY>
+                        </ui:CursorPosition>
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8e637478-f201-40d3-b542-14a40d4d9a70" InformativeScreenshot="74cb0981fb1fc5e25b87526c181d0e65" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='2' /&gt;&lt;sap id='tbar[1]/btn[8]' tooltip='Ejecutar*' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;Consultando reporte me3l&quot;]" />
+                    <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'GridViewColumn  Material'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
+                      <ui:UiElementExists.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bc99e561-09d8-4d90-a0ea-48ecf934263c" InformativeScreenshot="881c1f2f9a3a5ad17d5c5f1231e40029" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='2' /&gt;&lt;sap colName='EBELN' id='usr/cntlGRID1/shellcont/shell' tableRow='3' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:UiElementExists.Target>
+                    </ui:UiElementExists>
+                  </Sequence>
+                  <Sequence DisplayName="Sequence sesion 3" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_105">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Continuar'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition Position="Center">
+                          <ui:CursorPosition.OffsetX>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetX>
+                          <ui:CursorPosition.OffsetY>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetY>
+                        </ui:CursorPosition>
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8e637478-f201-40d3-b542-14a40d4d9a70" InformativeScreenshot="74cb0981fb1fc5e25b87526c181d0e65" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='3' /&gt;&lt;sap id='tbar[1]/btn[8]' tooltip='Ejecutar*' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Consultando reporte zsd_pos_1389_1&quot;]" />
+                    <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'GridViewColumn  Material'" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="UiElementExists_6">
+                      <ui:UiElementExists.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bc99e561-09d8-4d90-a0ea-48ecf934263c" InformativeScreenshot="61a74f8ac1349420583d6bae0d20b8f2" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' sapSession='3' /&gt;&lt;sap colName='BUKRS' id='usr/cntlGRID1/shellcont/shell/shellcont[1]/shell' tableRow='0' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:UiElementExists.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:UiElementExists>
+                  </Sequence>
+                </Parallel>
+                <Assign sap:VirtualizedContainerService.HintSize="450,82" sap2010:WorkflowViewState.IdRef="Assign_14">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[int_Contador]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,141" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;Guardando archivos de las transacciones&quot;]" />
+                <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[int_Contador&lt;=4]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="450,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+                  <ui:InterruptibleDoWhile.Body>
+                    <Sequence sap:VirtualizedContainerService.HintSize="476,323" sap2010:WorkflowViewState.IdRef="Sequence_106">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SAP\Guardar_Archivos.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="SAP\Guardar_Archivos.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_str_sessionSAP">[int_Contador.ToString]</InArgument>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Me2nOpen">[out_dt_Me2nOpen]</InOutArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Me3l">[out_dt_Open_me3l]</InOutArgument>
+                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_zsd_pos_1389_1">[out_dt_Transit_1389]</InOutArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                      <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_15">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[int_Contador]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">[int_Contador+1]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ui:InterruptibleDoWhile.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:InterruptibleDoWhile>
+                <Sequence DisplayName="Sequence cerrar modos" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_107">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;Borrar modo 1&quot;]" />
+                  <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar cerrar modo" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_7" Item="Sistema/Borrar modo">
+                    <ucas:ClickToolbarButton.Items>
+                      <scg:List x:TypeArguments="x:String" Capacity="50">
+                        <x:String>Lista/Refrescar</x:String>
+                        <x:String>Lista/Releer</x:String>
+                        <x:String>Lista/Finalizar</x:String>
+                        <x:String>Tratar/Cancelar</x:String>
+                        <x:String>Pasar a/Atrás</x:String>
+                        <x:String>Opciones/Selección de objeto</x:String>
+                        <x:String>Opciones/Selección de lista individual</x:String>
+                        <x:String>Tratamiento en masa/Ejecutar</x:String>
+                        <x:String>Tratamiento en masa/Opciones</x:String>
+                        <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                        <x:String>Sistema/Crear modo</x:String>
+                        <x:String>Sistema/Borrar modo</x:String>
+                        <x:String>Sistema/Servicios para objeto</x:String>
+                        <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                        <x:String>Sistema/Jobs propios</x:String>
+                        <x:String>Sistema/Mensaje breve</x:String>
+                        <x:String>Sistema/Status...</x:String>
+                        <x:String>Sistema/Salir del sistema</x:String>
+                        <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                        <x:String>Ayuda/Biblioteca SAP</x:String>
+                        <x:String>Ayuda/Glosario</x:String>
+                        <x:String>Ayuda/Infos de release</x:String>
+                        <x:String>Ayuda/SAP Service Marketplace</x:String>
+                        <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                        <x:String>Ayuda/Parametrizaciones...</x:String>
+                        <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                        <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                        <x:String>Sistema/Servicios/Reporting</x:String>
+                        <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                        <x:String>Sistema/Servicios/Control de salida</x:String>
+                        <x:String>Sistema/Servicios/Input directo</x:String>
+                        <x:String>Sistema/Servicios/Cola</x:String>
+                        <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                        <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                        <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                        <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                        <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                        <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                        <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                        <x:String>Sistema/Lista/Imprimir</x:String>
+                        <x:String>Sistema/Lista/Buscar...</x:String>
+                        <x:String>Sistema/Lista/Enviar</x:String>
+                        <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                        <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                        <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                      </scg:List>
+                    </ucas:ClickToolbarButton.Items>
+                    <ucas:ClickToolbarButton.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ucas:ClickToolbarButton.Target>
+                  </ucas:ClickToolbarButton>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;Borrar modo 2&quot;]" />
+                  <ucas:ClickToolbarButton ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Click Toolbar cerrar modo" sap:VirtualizedContainerService.HintSize="388,160" sap2010:WorkflowViewState.IdRef="ClickToolbarButton_8" Item="Sistema/Borrar modo">
+                    <ucas:ClickToolbarButton.Items>
+                      <scg:List x:TypeArguments="x:String" Capacity="50">
+                        <x:String>Lista/Refrescar</x:String>
+                        <x:String>Lista/Releer</x:String>
+                        <x:String>Lista/Finalizar</x:String>
+                        <x:String>Tratar/Cancelar</x:String>
+                        <x:String>Pasar a/Atrás</x:String>
+                        <x:String>Opciones/Selección de objeto</x:String>
+                        <x:String>Opciones/Selección de lista individual</x:String>
+                        <x:String>Tratamiento en masa/Ejecutar</x:String>
+                        <x:String>Tratamiento en masa/Opciones</x:String>
+                        <x:String>Tratamiento en masa/Log último tratam.masa</x:String>
+                        <x:String>Sistema/Crear modo</x:String>
+                        <x:String>Sistema/Borrar modo</x:String>
+                        <x:String>Sistema/Servicios para objeto</x:String>
+                        <x:String>Sistema/Órdenes SPOOL propias</x:String>
+                        <x:String>Sistema/Jobs propios</x:String>
+                        <x:String>Sistema/Mensaje breve</x:String>
+                        <x:String>Sistema/Status...</x:String>
+                        <x:String>Sistema/Salir del sistema</x:String>
+                        <x:String>Ayuda/Ayuda p.aplicación</x:String>
+                        <x:String>Ayuda/Biblioteca SAP</x:String>
+                        <x:String>Ayuda/Glosario</x:String>
+                        <x:String>Ayuda/Infos de release</x:String>
+                        <x:String>Ayuda/SAP Service Marketplace</x:String>
+                        <x:String>Ayuda/Registrar mensaje de soporte</x:String>
+                        <x:String>Ayuda/Parametrizaciones...</x:String>
+                        <x:String>Sistema/Valores prefijados/Retener datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Fijar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Borrar datos</x:String>
+                        <x:String>Sistema/Valores prefijados/Datos propios</x:String>
+                        <x:String>Sistema/Valores prefijados/Ampliar favoritos</x:String>
+                        <x:String>Sistema/Servicios/Reporting</x:String>
+                        <x:String>Sistema/Servicios/Quick Viewer</x:String>
+                        <x:String>Sistema/Servicios/Control de salida</x:String>
+                        <x:String>Sistema/Servicios/Input directo</x:String>
+                        <x:String>Sistema/Servicios/Cola</x:String>
+                        <x:String>Sistema/Servicios/Servicios SAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging dynpro</x:String>
+                        <x:String>Sistema/Utilidades/Depuración ABAP</x:String>
+                        <x:String>Sistema/Utilidades/Debugging sistema</x:String>
+                        <x:String>Sistema/Utilidades/Consumo recursos</x:String>
+                        <x:String>Sistema/Utilidades/Cola automatiz.procesamiento sincrónico</x:String>
+                        <x:String>Sistema/Utilidades/Trace de rendimiento</x:String>
+                        <x:String>Sistema/Utilidades/Trace de contexto</x:String>
+                        <x:String>Sistema/Utilidades/Visual.verif.autoriz</x:String>
+                        <x:String>Sistema/Lista/Imprimir</x:String>
+                        <x:String>Sistema/Lista/Buscar...</x:String>
+                        <x:String>Sistema/Lista/Enviar</x:String>
+                        <x:String>Sistema/Lista/Cabecera de lista</x:String>
+                        <x:String>Sistema/Mis objetos/Historial del objeto</x:String>
+                        <x:String>Sistema/Mis objetos/Tratar objetos</x:String>
+                      </scg:List>
+                    </ucas:ClickToolbarButton.Items>
+                    <ucas:ClickToolbarButton.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5edca949-cdfc-4b16-a5ea-9b623fee5046" InformativeScreenshot="719c282c4a1d5c93f4a543042ca55a30" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' /&gt;&lt;sap id='mbar' /&gt;" WaitForReady="COMPLETE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ucas:ClickToolbarButton.Target>
+                  </ucas:ClickToolbarButton>
+                </Sequence>
+              </Sequence>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <ui:KillProcess AppliesTo="{x:Null}" Process="{x:Null}" ContinueOnError="True" DisplayName="Kill Process Excel" sap:VirtualizedContainerService.HintSize="388,133" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="excel" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" InstanceCachePeriod="0" Visible="False" WorkbookPath="[in_Str_NombreArchivo]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence sap:VirtualizedContainerService.HintSize="450,455" sap2010:WorkflowViewState.IdRef="Sequence_90">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelWriteRange AddHeaders="True" DataTable="[out_dt_WareHouse_1200]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="Ware House" StartingCell="A1" />
+            <ui:ExcelWriteRange AddHeaders="True" DataTable="[out_dt_Open_me3l]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="Open" StartingCell="A1" />
+            <ui:ExcelWriteRange AddHeaders="True" DataTable="[out_dt_Transit_1389]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_3" SheetName="Transit" StartingCell="A1" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ExcelApplicationScope>
+    <ui:KillProcess AppliesTo="{x:Null}" Process="{x:Null}" ContinueOnError="True" DisplayName="Kill Process Excel" sap:VirtualizedContainerService.HintSize="388,133" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="excel" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="CommentOut_35">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="512,192" sap2010:WorkflowViewState.IdRef="Sequence_119">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence leer archivos" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_117">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dt_Open_me3l]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Open" WorkbookPath="[in_Str_NombreArchivo]" />
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="CommentOut_13">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="512,192" sap2010:WorkflowViewState.IdRef="Sequence_68">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Sequence transito" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dt_Transit_1389]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="434,88" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="Hoja1" WorkbookPath="[in_dic_Config(&quot;RutaOutput&quot;).ToString.Trim+&quot;ZSD_POS_1389_1_Transit.xlsx&quot;]" />
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Seleccionar columnas&quot;]" />
+                    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="614,1009" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <TryCatch.Try>
+                        <Assign sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_5">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="sd:DataTable">[out_dt_Transit_1389]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[out_dt_Transit_1389.AsEnumerable.CopyToDataTable.DefaultView.ToTable(False,"Soc.","Doc.vtas.","Factura","Cl.factura","Cliente","Material","Descripcion",
+"Lote","Aduana_Sal","Nombre Aduana Salida","Puerto des","Naviera","Tipo de contenedor","Nr_Contai","Nº de pedido","Fecha doc.","Cajas_Ped","Caj_Fact",
+"Peso neto","Volumen","Valor FOB","Tot_USD_Fa","Fech_Salid","Fec Emb")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="580,846" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="574,777" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                              <TryCatch.Try>
+                                <Assign sap:VirtualizedContainerService.HintSize="434,85" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="sd:DataTable">[out_dt_Transit_1389]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[out_dt_Transit_1389.AsEnumerable.CopyToDataTable.DefaultView.ToTable(False,"Soc.","Doc.vtas.","Factura","Cl.factura","Cliente","Material","Descripcion",
+"Lote","Aduana_Sal","Nombre Aduana Salida","Puerto des","Naviera","Tipo de contenedor","Nr_Contai","Nº de pedido","Fecha doc.","Cajas_Ped","Caj_Fact",
+"Neto","Volumen","Valor FOB","Tot_USD_Fa","Fech_Salid","Fec Emb")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </TryCatch.Try>
+                              <TryCatch.Catches>
+                                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="540,614" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ActivityAction x:TypeArguments="s:Exception">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                    </ActivityAction.Argument>
+                                    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="534,545" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                                      <TryCatch.Try>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="496,317" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,85" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="sd:DataTable">[out_dt_Transit_1389]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[out_dt_Transit_1389.AsEnumerable.CopyToDataTable.DefaultView.ToTable(False,"Soc.","Doc.vtas.","Factura","Cl.factura","Cliente","Material","Descripcion",
+"Lote","Aduana_Sal","Denomin.","Puerto des","Naviera","Tipo de contenedor","Nr_Contai","Nº de pedido","Fecha doc.","Cajas_Ped","Caj_Fact",
+"Peso neto","Volumen","Valor FOB","Tot_USD_Fa","Fech_Salid","Fec Emb")]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[out_dt_Transit_1389.Columns("Denomin.").ColumnName]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">Nombre Aduana Salida</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </TryCatch.Try>
+                                      <TryCatch.Catches>
+                                        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="500,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ActivityAction x:TypeArguments="s:Exception">
+                                            <ActivityAction.Argument>
+                                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                            </ActivityAction.Argument>
+                                            <Sequence sap:VirtualizedContainerService.HintSize="496,81" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <Assign sap:VirtualizedContainerService.HintSize="434,85" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="sd:DataTable">[out_dt_Transit_1389]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[out_dt_Transit_1389.AsEnumerable.CopyToDataTable.DefaultView.ToTable(False,"Soc.","Doc.vtas.","Factura","Cl.factura","Cliente","Material","Descripcion",
+"Lote","Aduana_Sal","Denomin.","Puerto des","Naviera","Tipo de contenedor","Nr_Contai","Nº de pedido","Fecha doc.","Cajas_Ped","Caj_Fact",
+"Neto","Volumen","Valor FOB","Tot_USD_Fa","Fech_Salid","Fec Emb")]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign DisplayName="Assign Nombre Aduana Salida" sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_10">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[out_dt_Transit_1389.Columns("Denomin.").ColumnName]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">Nombre Aduana Salida</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign DisplayName="Assign Peso neto" sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_11">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[out_dt_Transit_1389.Columns("Neto").ColumnName]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">["Peso neto"]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                            </Sequence>
+                                          </ActivityAction>
+                                        </Catch>
+                                      </TryCatch.Catches>
+                                    </TryCatch>
+                                  </ActivityAction>
+                                </Catch>
+                              </TryCatch.Catches>
+                            </TryCatch>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Agrupar y sumar&quot;]" />
+                    <Assign sap:VirtualizedContainerService.HintSize="434,85" sap2010:WorkflowViewState.IdRef="Assign_12">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataTable">[out_dt_Transit_1389]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[(From row1 In out_dt_Transit_1389.AsEnumerable()
+Group row1 By m = row1.Item("Material").ToString​.trim,fd=row1("Fecha doc.").ToString.Trim, f=row1("Factura").ToString.Trim Into grp=Group
+Select  out_dt_Transit_1389.Rows.Add(
+{​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​grp(0)(0),grp(0)(1),grp(0)(2),grp(0)(3),grp(0)(4),grp(0)(5),grp(0)(6),grp(0)(7),grp(0)(8),grp(0)(9),grp(0)(10),grp(0)(11),grp(0)(12),grp(0)(13),grp(0)(14),grp(0)(15),grp(0)(16),
+grp.Sum(Function(x)  CDbl(x.Item("Caj_Fact").ToString)),grp(0)(18),grp(0)(19),grp(0)(20),grp(0)(21),grp(0)(22),grp(0)(23)}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+)).CopyToDataTable​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap:VirtualizedContainerService.HintSize="434,85" sap2010:WorkflowViewState.IdRef="Assign_13">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataTable">[out_dt_Transit_1389]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[(From z In out_dt_Transit_1389
+Where Not String.IsNullOrEmpty(z("Material").ToString.Trim)
+Select z).copytoDatatable]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[out_dt_Transit_1389]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Transit" WorkbookPath="[in_Str_NombreArchivo]" />
+                  </Sequence>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dt_Transit_1389]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Transit" WorkbookPath="[in_Str_NombreArchivo]" />
+            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dt_WareHouse_1200]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="Ware House" WorkbookPath="[in_Str_NombreArchivo]" />
+          </Sequence>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Gsuite\LecturaArchivoB2C.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Gsuite\LecturaArchivoB2C.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_ContraseñaGsuite">[in_str_ContraseñaGsuite]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_UsuarioGsuite">[in_str_UsuarioGsuite]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_ArchivoB2C">[out_dt_ArchivoB2C]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_OverRoad">[out_dt_OverRoad]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_NationalAcct">[out_dt_NationalAcct]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Gsuite\LeerArchivoBaseVisibilidad.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Gsuite\LeerArchivoBaseVisibilidad.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_UsuarioGsuite">[in_str_UsuarioGsuite]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str_ContraseñaGsuite">[in_str_ContraseñaGsuite]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dic_Config">[in_dic_Config]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_Centros">[out_dt_Centros]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_TipoDocumentos">[out_dt_TipoDocumentos]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_Proveedores">[out_dt_Proveedores]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_Materiales">[out_dt_Materiales]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_str_IDArchivoBase">[out_str_IDArchivoBase]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>
